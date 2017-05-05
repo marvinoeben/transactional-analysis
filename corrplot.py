@@ -4,7 +4,7 @@ import matplotlib.cm as cm
 from matplotlib.patches import Ellipse
 import string
 
-def corrplot(data, pvalues, labels):
+def corrplot(data, pvalues, labels, figsize):
     """Creates a correlation plot of the passed data.
 
     The function returns the plot which can then be shown with
@@ -18,13 +18,15 @@ def corrplot(data, pvalues, labels):
     correlation value; if none it is assumed to be the zero matrix
 
     labels is an array containing the variable names
+
+    figsize is a tuple which will indicate the size of the picture
     """
 
-    plt.figure(1)
+    plt.figure(1,figsize=(100,100))
 
     column_labels = labels
     row_labels = labels
-    
+
     ax = plt.subplot(1, 1, 1, aspect='equal')
 
     width, height = data.shape
@@ -32,7 +34,7 @@ def corrplot(data, pvalues, labels):
 
     if pvalues is None:
         pvalues = np.zeros([num_rows, num_cols])
-        
+
     shrink = 0.9
 
     poscm = cm.get_cmap('Blues')
@@ -57,7 +59,7 @@ def corrplot(data, pvalues, labels):
 
     ax.set_xlim(-1, num_cols)
     ax.set_ylim(-1, num_rows)
-        
+
     ax.xaxis.tick_top()
     xtickslocs = np.arange(len(row_labels))
     ax.set_xticks(xtickslocs)
@@ -71,7 +73,7 @@ def corrplot(data, pvalues, labels):
     return plt
 
 if __name__ == "__main__":
-    
+
     num_rows = 20
     num_cols = num_rows
 
@@ -83,8 +85,8 @@ if __name__ == "__main__":
                                        np.random.randint(min_length,
                                                          max_length)))
               for y in np.arange(num_rows)]
-    
-   
+
+
     data = np.random.random([num_rows, num_cols])
 
     data[np.random.choice(num_rows, num_rows / 2), :] *= -1
