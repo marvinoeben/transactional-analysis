@@ -22,7 +22,7 @@ def corrplot(data, pvalues, labels, figsize):
     figsize is a tuple which will indicate the size of the picture
     """
 
-    plt.figure(1,figsize=(100,100))
+    plt.figure(1,figsize=figsize)
 
     column_labels = labels
     row_labels = labels
@@ -63,7 +63,7 @@ def corrplot(data, pvalues, labels, figsize):
     ax.xaxis.tick_top()
     xtickslocs = np.arange(len(row_labels))
     ax.set_xticks(xtickslocs)
-    ax.set_xticklabels(row_labels, rotation=30, fontsize='small', ha='left')
+    ax.set_xticklabels(row_labels, rotation=30, fontsize='medium', ha='left')
 
     ax.invert_yaxis()
     ytickslocs = np.arange(len(row_labels))
